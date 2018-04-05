@@ -140,18 +140,27 @@ def entity_sentiment_text(text):
         encoding = enums.EncodingType.UTF16
 
     result = client.analyze_entity_sentiment(document, encoding)
-
+    max_sal = 0
+    max_word = ""
+    sentiment = 0
     for entity in result.entities:
-        print('Mentions: ')
-        print(u'Name: "{}"'.format(entity.name))
+        # print('Mentions: ')
+        # print(u'Name: "{}"'.format(entity.name))
         for mention in entity.mentions:
             print(u'  Begin Offset : {}'.format(mention.text.begin_offset))
             print(u'  Content : {}'.format(mention.text.content))
             print(u'  Magnitude : {}'.format(mention.sentiment.magnitude))
             print(u'  Sentiment : {}'.format(mention.sentiment.score))
             print(u'  Type : {}'.format(mention.type))
-        print(u'Salience: {}'.format(entity.salience))
-        print(u'Sentiment: {}\n'.format(entity.sentiment))
+        # print(u'Salience: {}'.format(entity.salience))
+        # print(u'Sentiment: {}\n'.format(entity.sentiment))
+        sentiment = sentiment + entity.sentiment
+        if(max_sal<entity.salience):
+            max_sal = entity.salience
+            max_word = mention
+    print "Most important is "+max_word
+    print "sentiment "+sentiment
+
 
 def classify_text(text):
     """Classifies content categories of the provided text."""
@@ -174,11 +183,16 @@ def classify_text(text):
 if __name__ == '__main__':
     text = "I am a good person that borns people for fun and feeds their wifes because they are pretty and valuable"
     text = "#AMLO simulated sale of apartments in Copilco, reveals Pejeleaks https://goo.gl/if26pR"
-    
-    analyze(text)
-    entities_text(text)
-    sentiment_text(text)
-    syntax_text(text)
+    #analyze(text)
+    #print("-> anal")
+    #entities_text(text)
+    #print("-> entiti")
+    #sentiment_text(text)
+    #print("-> senti")
+    #syntax_text(text)
+    #print("-> syntax")
     entity_sentiment_text(text)
-    classify_text(text)
+    print("-> enti_sent")
+    #classify_text(text)
+    #print("-> class")
     app.run(host= '0.0.0.0')
