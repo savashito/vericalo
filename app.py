@@ -45,5 +45,5 @@ def analyze(content):
     return "OK"
 
 if __name__ == '__main__':
-    analyze("I am a bad person that kill people for fun and eat their victims because they are tasty and delicious")
+    analyze("I am a good person that borns people for fun and feeds their wifes because they are pretty and valuable")
 
