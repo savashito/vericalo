@@ -3,12 +3,15 @@ from google.cloud.language import enums
 from google.cloud.language import types
 from flask import Flask
 from flask import request
+from flask_cors import CORS
+import sys
 
 app = Flask(__name__)
+CORS(app)
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/")
 def hello():
-    content = request.form['content']
+    content = request.args.get('content')
     result = analyze(content)
     return result
 
@@ -37,13 +40,19 @@ def analyze_sentiment(annotations):
 def analyze(content):
     document = types.Document(content=content, type=enums.Document.Type.PLAIN_TEXT)
     client = language.LanguageServiceClient()
-    annotations = client.analyze_sentiment(document=document)
-    analyze_sentiment(annotations)
-    response = client.classify_text(document)
-    categories = response.categories
-    analyze_categories(categories)
+    try:
+        annotations = client.analyze_sentiment(document=document)
+        analyze_sentiment(annotations)
+    except:
+        print(sys.exc_info()[0])
+    try:
+        response = client.classify_text(document)
+        categories = response.categories
+        analyze_categories(categories)
+    except:
+        print(sys.exc_info()[0])
     return "OK"
 
 if __name__ == '__main__':
     analyze("I am a good person that borns people for fun and feeds their wifes because they are pretty and valuable")
-
+    app.run(host= '0.0.0.0')
