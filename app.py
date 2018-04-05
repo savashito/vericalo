@@ -5,6 +5,7 @@ from flask import Flask
 from flask import request
 from flask_cors import CORS
 import sys
+import six
 
 app = Flask(__name__)
 CORS(app)
@@ -82,5 +83,5 @@ def entities_text(text):
               entity.metadata.get('wikipedia_url', '-')))
 
 if __name__ == '__main__':
-    analyze("I am a good person that borns people for fun and feeds their wifes because they are pretty and valuable")
+    entities_text("I am a good person that borns people for fun and feeds their wifes because they are pretty and valuable")
     app.run(host= '0.0.0.0')
