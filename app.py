@@ -179,7 +179,127 @@ def classify_text(text):
         print(u'=' * 20)
         print(u'{:<16}: {}'.format('name', category.name))
         print(u'{:<16}: {}'.format('confidence', category.confidence))
+###########
 
+
+import tweepy, config
+from googletrans import Translator
+from textblob import TextBlob
+translator = Translator()
+
+
+
+# class MyStreamListener(tweepy.StreamListener):
+#   def on_status(self, status):
+#       print(status.text)
+#       print (status)
+#       # print ()
+#       id = status.id
+#       tw = tweepy.API.statuses_lookup(id)
+#       print(tw)
+#       return
+#       tr = translator.translate(status.text)
+#       print(tr.text)
+#       wiki = TextBlob(tr.text)
+#       print(wiki.sentiment)
+#       # tweepy.API.statuses_lookup(id_[, include_entities][, trim_user][, map_])
+
+def get_sentiment(text):
+    tr = translator.translate(text)
+    print(tr.text)
+    wiki = TextBlob(tr.text)
+    print(wiki.sentiment)
+    return wiki.sentiment,tr.text
+def get_author_influence(author):
+    infl = author.followers_count+author.statuses_count+author.friends_count
+    # print("Author influence "+str(infl))
+    return infl
+def get_tweet_influence(t):
+    infl = t.retweet_count + t.favorite_count
+    # print("Tweet influence "+str(infl))
+    return infl
+def get_hash_tags(t):
+    hs = t.entities['hashtags']
+    if(len(hs) > 0):
+        hs = hs[0]['text']
+    else:
+        return None
+    # print(hs)
+    return hs
+def get_image(t):
+    # hs = t.media['media_url_https']
+    # hs = t.entities['media_url_https']
+    media = t.entities['media']
+    if(len(media)>0):
+        hs = media[0]['media_url_https'] # ["media_url"] #media_url_https
+    else:
+        hs = None
+    return hs
+def get_retweets_ids(id):
+    results = api.retweets(id)
+    ids = []
+
+    for i in range(len(results)):
+        ids.append(results[i].id)
+    # print(len(results))
+    # print(ids)
+    return ids
+
+class Tweet():
+    def __init__(self,id,api):
+        tweet = api.statuses_lookup([id])
+        t = tweet[0]
+        self.image = get_image(t)
+        self.api = api
+        self.text = t.text
+        self.influence = get_tweet_influence(t)
+        self.hashtags = get_hash_tags(t)
+        self.retweets = t.retweet_count
+        self.author_influence = get_author_influence(t.author)
+        self.sentiment,self.etext = get_sentiment(t.text)
+        self.retweets_ids =  get_retweets_ids(id)
+        print(self.sentiment)
+
+    def printy(self):
+        print("text: "+self.text)
+        print("influence: " + str(self.influence))
+        print("hashtags: " +  str(self.hashtags))
+        print("author_influence: " + str(self.author_influence))
+        print("sentiment: " + str(self.sentiment))
+        print("retweets_ids: " + str(self.retweets_ids))
+        print("retweets: " + str(self.retweets))
+    def get_retweets(self):
+        tweets = []
+        for i in range(len(self.retweets_ids)):
+            id = self.retweets_ids[i]
+            print (id)
+            tweet = Tweet(id,self.api)
+            tweet.printy()
+
+    def get_virality_array(self):
+        return [ self.influence , 10, 30 , self.retweets, [], self.image, None]
+        # return [ self.influence , 10, 30 , self.retweets, fuentes, self.image, estados]
+        # return None
+
+# get_sentiment("malo malo malo ratero")
+# get_sentiment("es un buen ratero")
+# exit()
+auth = tweepy.OAuthHandler(config.consumer_key, config.consumer_secret)
+auth.set_access_token(config.access_token, config.access_token_secret)
+api = tweepy.API(auth)
+
+# [ 10032 , 10%, 30 %, retweet, fuentes, foto, estados]
+
+# tweepy
+# 979825600973094912 parent
+# 981300116844896259 random user
+# 979833734957490176 jordy
+
+# tw.get_retweets()
+# print(tw.get_virality_array())
+
+
+###########
 if __name__ == '__main__':
     text = "I am a good person that borns people for fun and feeds their wifes because they are pretty and valuable"
     text = "#AMLO simulated sale of apartments in Copilco, reveals Pejeleaks https://goo.gl/if26pR"
@@ -191,7 +311,11 @@ if __name__ == '__main__':
     #print("-> senti")
     #syntax_text(text)
     #print("-> syntax")
-    entity_sentiment_text(text)
+    id = 979825600973094912
+    tw = Tweet(id,api)
+    print ("texto e "+tw.etext)
+    # tw.printy()
+    # entity_sentiment_text(text)
     print("-> enti_sent")
     #classify_text(text)
     #print("-> class")
