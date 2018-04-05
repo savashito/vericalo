@@ -174,6 +174,7 @@ def classify_text(text):
 if __name__ == '__main__':
     text = "I am a good person that borns people for fun and feeds their wifes because they are pretty and valuable"
     text = "#AMLO simulated sale of apartments in Copilco, reveals Pejeleaks https://goo.gl/if26pR"
+    
     analyze(text)
     entities_text(text)
     sentiment_text(text)
