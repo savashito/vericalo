@@ -174,10 +174,16 @@ def classify_text(text):
 if __name__ == '__main__':
     text = "I am a good person that borns people for fun and feeds their wifes because they are pretty and valuable"
     text = "#AMLO simulated sale of apartments in Copilco, reveals Pejeleaks https://goo.gl/if26pR"
-    analyze(text)
-    entities_text(text)
-    sentiment_text(text)
-    syntax_text(text)
+    #analyze(text)
+    #print("-> anal")
+    #entities_text(text)
+    #print("-> entiti")
+    #sentiment_text(text)
+    #print("-> senti")
+    #syntax_text(text)
+    #print("-> syntax")
     entity_sentiment_text(text)
-    classify_text(text)
+    print("-> enti_sent")
+    #classify_text(text)
+    #print("-> class")
     app.run(host= '0.0.0.0')
