@@ -154,12 +154,12 @@ def entity_sentiment_text(text):
             print(u'  Type : {}'.format(mention.type))
         # print(u'Salience: {}'.format(entity.salience))
         # print(u'Sentiment: {}\n'.format(entity.sentiment))
-        sentiment = sentiment + entity.sentiment
+        #sentiment = sentiment + entity.sentiment
         if(max_sal<entity.salience):
             max_sal = entity.salience
             max_word = mention
-    print "Most important is "+max_word
-    print "sentiment "+sentiment
+    print "Most important is {}".format(max_word)
+    print "sentiment "+str(sentiment)
 
 
 def classify_text(text):
