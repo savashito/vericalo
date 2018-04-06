@@ -146,19 +146,19 @@ def entity_sentiment_text(text):
     for entity in result.entities:
         # print('Mentions: ')
         # print(u'Name: "{}"'.format(entity.name))
-        for mention in entity.mentions:
-            print(u'  Begin Offset : {}'.format(mention.text.begin_offset))
-            print(u'  Content : {}'.format(mention.text.content))
-            print(u'  Magnitude : {}'.format(mention.sentiment.magnitude))
-            print(u'  Sentiment : {}'.format(mention.sentiment.score))
-            print(u'  Type : {}'.format(mention.type))
+        # for mention in entity.mentions:
+        #     print(u'  Begin Offset : {}'.format(mention.text.begin_offset))
+        #     print(u'  Content : {}'.format(mention.text.content))
+        #     print(u'  Magnitude : {}'.format(mention.sentiment.magnitude))
+        #     print(u'  Sentiment : {}'.format(mention.sentiment.score))
+        #     print(u'  Type : {}'.format(mention.type))
         # print(u'Salience: {}'.format(entity.salience))
         # print(u'Sentiment: {}\n'.format(entity.sentiment))
         #sentiment = sentiment + entity.sentiment
         # print salience
         # print entity.salience
         # print entity
-        print (entity.mentions)
+        print (entity.mentions[0].text.content)
         print (entity.salience)
         # print 
         if(max_sal<entity.salience):
