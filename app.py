@@ -258,7 +258,7 @@ class Tweet():
         self.author_influence = get_author_influence(t.author)
         self.sentiment,self.etext = get_sentiment(t.text)
         self.retweets_ids =  get_retweets_ids(id)
-        print(self.sentiment)
+        # print(self.sentiment)
 
     def printy(self):
         print("text: "+self.etext)
@@ -268,6 +268,9 @@ class Tweet():
         print("sentiment: " + str(self.sentiment))
         print("retweets_ids: " + str(self.retweets_ids))
         print("retweets: " + str(self.retweets))
+    def json(self):
+        o = {jojo:"df"}
+        print (o)
     def get_retweets(self):
         tweets = []
         for i in range(len(self.retweets_ids)):
@@ -301,8 +304,8 @@ api = tweepy.API(auth)
 
 ###########
 if __name__ == '__main__':
-    text = "I am a good person that borns people for fun and feeds their wifes because they are pretty and valuable"
-    text = "#AMLO simulated sale of apartments in Copilco, reveals Pejeleaks https://goo.gl/if26pR"
+    # text = "I am a good person that borns people for fun and feeds their wifes because they are pretty and valuable"
+    # text = "#AMLO simulated sale of apartments in Copilco, reveals Pejeleaks https://goo.gl/if26pR"
     #analyze(text)
     #print("-> anal")
     #entities_text(text)
@@ -313,10 +316,11 @@ if __name__ == '__main__':
     #print("-> syntax")
     id = 979825600973094912
     tw = Tweet(id,api)
-    print ("texto e "+tw.etext)
-    tw.printy()
-    entity_sentiment_text(tw.etext)
-    print("-> enti_sent")
+    tw.json()
+    # print ("texto e "+tw.etext)
+    # tw.printy()
+    # entity_sentiment_text(tw.etext)
+    # print("-> enti_sent")
     #classify_text(text)
     #print("-> class")
     app.run(host= '0.0.0.0')
