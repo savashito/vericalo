@@ -158,14 +158,15 @@ def entity_sentiment_text(text):
         # print salience
         # print entity.salience
         # print entity
-        # mention = 
-        print (entity.name)
+        mention = entity.name
+        # print (entity.name)
         # print (entity.mentions[0].text.content)
         # print (entity.salience)
         # print 
-    #     if(max_sal<entity.salience):
-    #         max_sal = entity.salience
-    #         max_word = mention
+        if(max_sal<entity.salience):
+            max_sal = entity.salience
+            max_word = mention
+    return max_word,max_sal
     # print "Most important is {}".format(max_word)
     # print "sentiment "+str(sentiment)
 
@@ -341,7 +342,7 @@ if __name__ == '__main__':
     tw.json()
     # print ("texto e "+tw.etext)
     # tw.printy()
-    entity_sentiment_text(tw.etext)
+    print (entity_sentiment_text(tw.etext))
     # print("-> enti_sent")
     #classify_text(text)
     #print("-> class")
