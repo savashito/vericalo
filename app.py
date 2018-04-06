@@ -337,7 +337,7 @@ if __name__ == '__main__':
     tw.json()
     # print ("texto e "+tw.etext)
     # tw.printy()
-    # entity_sentiment_text(tw.etext)
+    entity_sentiment_text(tw.etext)
     # print("-> enti_sent")
     #classify_text(text)
     #print("-> class")
