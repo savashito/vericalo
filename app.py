@@ -206,9 +206,9 @@ translator = Translator()
 
 def get_sentiment(text):
     tr = translator.translate(text)
-    print(tr.text)
+    # print(tr.text)
     wiki = TextBlob(tr.text)
-    print(wiki.sentiment)
+    # print(wiki.sentiment)
     return wiki.sentiment,tr.text
 def get_author_influence(author):
     infl = author.followers_count+author.statuses_count+author.friends_count
@@ -269,7 +269,7 @@ class Tweet():
         print("retweets_ids: " + str(self.retweets_ids))
         print("retweets: " + str(self.retweets))
     def json(self):
-        o = {jojo:"df"}
+        o = {"jojo":"df","sd":3}
         print (o)
     def get_retweets(self):
         tweets = []
