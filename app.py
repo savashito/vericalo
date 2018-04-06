@@ -284,7 +284,7 @@ class Tweet():
             "percentFuenteFalsa":None,
             "percentFuenteTemaFalsa":None,
             "percentTemaFalsa":None,
-            "tema1":{val:"",imp:""},
+            "tema1":{"val":"","imp":""},
 
             "image":self.image
             }
