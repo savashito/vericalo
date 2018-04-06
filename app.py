@@ -289,7 +289,7 @@ class Tweet():
             "percentFuenteFalsa":None,
             "percentFuenteTemaFalsa":None,
             "percentTemaFalsa":None,
-            "tema1":{"val":"","imp":""},
+            "tema1":{"val":self.t1val"","imp":self.t1imp},
 
             "image":self.image
             }
@@ -339,10 +339,12 @@ if __name__ == '__main__':
     #print("-> syntax")
     id = 979825600973094912
     tw = Tweet(id,api)
+    
+    tw.t1val,tw.t1imp =  entity_sentiment_text(tw.etext)
     tw.json()
     # print ("texto e "+tw.etext)
     # tw.printy()
-    print (entity_sentiment_text(tw.etext))
+    # print ()
     # print("-> enti_sent")
     #classify_text(text)
     #print("-> class")
