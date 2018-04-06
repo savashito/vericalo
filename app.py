@@ -157,7 +157,9 @@ def entity_sentiment_text(text):
         #sentiment = sentiment + entity.sentiment
         # print salience
         # print entity.salience
-        print entity
+        # print entity
+        print (entity.text.content)
+        print (entity.salience)
         # print 
         if(max_sal<entity.salience):
             max_sal = entity.salience
