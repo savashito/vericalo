@@ -261,7 +261,7 @@ class Tweet():
         print(self.sentiment)
 
     def printy(self):
-        print("text: "+self.text)
+        print("text: "+self.etext)
         print("influence: " + str(self.influence))
         print("hashtags: " +  str(self.hashtags))
         print("author_influence: " + str(self.author_influence))
@@ -314,8 +314,8 @@ if __name__ == '__main__':
     id = 979825600973094912
     tw = Tweet(id,api)
     print ("texto e "+tw.etext)
-    # tw.printy()
-    # entity_sentiment_text(text)
+    tw.printy()
+    entity_sentiment_text(tw.etext)
     print("-> enti_sent")
     #classify_text(text)
     #print("-> class")
