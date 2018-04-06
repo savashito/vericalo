@@ -155,6 +155,10 @@ def entity_sentiment_text(text):
         # print(u'Salience: {}'.format(entity.salience))
         # print(u'Sentiment: {}\n'.format(entity.sentiment))
         #sentiment = sentiment + entity.sentiment
+        # print salience
+        # print entity.salience
+        print entity
+        # print 
         if(max_sal<entity.salience):
             max_sal = entity.salience
             max_word = mention
@@ -279,7 +283,10 @@ class Tweet():
 
             "percentFuenteFalsa":None,
             "percentFuenteTemaFalsa":None,
-            "percentTemaFalsa":None
+            "percentTemaFalsa":None,
+            "tema1":{val:"",imp:""},
+
+            "image":self.image
             }
         print (o)
     def get_retweets(self):
