@@ -269,7 +269,18 @@ class Tweet():
         print("retweets_ids: " + str(self.retweets_ids))
         print("retweets: " + str(self.retweets))
     def json(self):
-        o = {"jojo":"df","sd":3}
+        o = {"text":self.text,
+            "etext":self.etext,
+            "author_influence":self.author_influence,
+            "shares":self.retweets,
+            "interacciones":self.retweets,
+            "interPos":None,
+            "interNeg":None,
+
+            "percentFuenteFalsa":None,
+            "percentFuenteTemaFalsa":None,
+            "percentTemaFalsa":None
+            }
         print (o)
     def get_retweets(self):
         tweets = []
