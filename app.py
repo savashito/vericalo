@@ -9,8 +9,12 @@ translator = Translator()
 class MyStreamListener(tweepy.StreamListener):
 
   def on_status(self, status):
-      print (status.text.encode('utf-8').strip())
-      return
+    date = get_date_as_string(status.created_at)
+    print (date, status.text.encode('utf-8').strip())
+    return
+
+def get_date_as_string(date, format = "%a, %d %b %Y %H:%M:%S"):
+    return date.strftime(format)
 
 def get_sentiment(text):
     tr = translator.translate(text)
@@ -18,7 +22,7 @@ def get_sentiment(text):
     return wiki.sentiment,tr.text
 
 def get_author_influence(author):
-    infl = author.followers_count+author.statuses_count+author.friends_count
+    infl = author.followers_count + author.statuses_count + author.friends_count
     return infl
 
 def get_tweet_influence(t):
